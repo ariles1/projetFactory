@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Version;
 
 @Entity
 @SequenceGenerator(name = "seqMatiere", sequenceName = "seq_matiere", initialValue = 100, allocationSize = 1)
@@ -15,7 +16,15 @@ public class Matiere {
 	private String nom;
 	@OneToMany(mappedBy="key.matiere")
 	private List<Enseigner> enseignements;
+	@Version
+	private Integer version;
 	
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public Matiere() {
 		super();
 	}

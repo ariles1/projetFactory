@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Version;
 
 import projet.factory.entity.view.JsonViews;
 
@@ -34,7 +35,15 @@ public class Formateur {
 	@OneToMany(mappedBy="formateur")
 	@JsonView(JsonViews.FormateurWithIndisponibilites.class)
 	private List<Indisponibilite> indisponibilites;
+	@Version
+	private Integer version;
 	
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public Formateur() {
 		super();
 	}

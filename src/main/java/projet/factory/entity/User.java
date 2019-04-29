@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "users")
@@ -16,7 +17,15 @@ public class User {
 	private Boolean enable;
 	@OneToMany(mappedBy = "user")
 	private List<UserRole> roles;
-
+	@Version
+	private Integer version;
+	
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public User() {
 	}
 

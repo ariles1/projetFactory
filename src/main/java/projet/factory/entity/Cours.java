@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,6 +38,8 @@ public class Cours {
 	@ManyToOne
 	@JoinColumn(name = "id_formation")
 	private Formation formation;
+	@Version
+	private Integer version;
 	
 	public Cours() {
 		super();

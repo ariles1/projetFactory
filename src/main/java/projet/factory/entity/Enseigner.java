@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 public class Enseigner {
@@ -16,6 +17,8 @@ public class Enseigner {
 	private Niveau niveau;
 	@OneToMany(mappedBy="enseignement")
 	private List<Cours> courses;
+	@Version
+	private Integer version;
 	
 	public Enseigner() {
 	}
@@ -34,6 +37,22 @@ public class Enseigner {
 
 	public void setNiveau(Niveau niveau) {
 		this.niveau = niveau;
+	}
+
+	public List<Cours> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Cours> courses) {
+		this.courses = courses;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 	

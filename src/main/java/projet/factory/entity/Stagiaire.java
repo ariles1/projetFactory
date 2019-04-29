@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Version;
 @Entity
 @SequenceGenerator(name = "seqStagiaire", sequenceName = "seq_stagiaire", initialValue = 100, allocationSize = 1)
 public class Stagiaire {
@@ -25,7 +26,15 @@ public class Stagiaire {
 	@ManyToOne
 	@JoinColumn(name="id_formation")
 	private Formation formation;
+	@Version
+	private Integer version;
 	
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public Stagiaire() {
 		super();
 	}
