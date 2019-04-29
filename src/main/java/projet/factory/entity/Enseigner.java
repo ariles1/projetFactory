@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -22,7 +23,17 @@ public class Enseigner {
 	@JsonView(JsonViews.EnseignerWithCours.class)
 	@OneToMany(mappedBy="enseignement")
 	private List<Cours> courses;
+	@Version
+	private Integer version;
 	
+	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public Enseigner() {
 	}
 

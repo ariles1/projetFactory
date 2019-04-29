@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +38,17 @@ public class Ordinateur {
 	@JsonView(JsonViews.OrdinateurWithStagiaire.class)
 	@OneToOne(mappedBy="ordinateur")
 	private Stagiaire stagiaire;
+	@Version
+	private Integer version;
 	
+	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public Ordinateur() {
 		super();
 	}

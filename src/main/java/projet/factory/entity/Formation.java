@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,7 +40,17 @@ public class Formation {
 	@JsonView(JsonViews.FormationWithStagiaire.class)
 	@OneToMany(mappedBy="formation")
 	private List<Stagiaire> stagiaires;
+	@Version
+	private Integer version;
 	
+	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	public Formation() {
 		super();
 	}
