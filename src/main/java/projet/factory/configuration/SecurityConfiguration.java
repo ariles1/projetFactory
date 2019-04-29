@@ -19,11 +19,13 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
 	// definition des urls accessibles en direct ou en authentifier
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-		.antMatchers(HttpMethod.OPTIONS).anonymous();
+		/*
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous();
 		http.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic().and().csrf().disable();
 		http.authorizeRequests().antMatchers("/**").hasRole("ADMIN").and().formLogin().loginPage("/login")
 				.failureUrl("/login?error=true").permitAll().and().logout().logoutSuccessUrl("/home");
+		*/
+		http.authorizeRequests().antMatchers("/**").permitAll();
 	}
 
 	@Autowired
