@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import projet.factory.entity.Stagiaire;
+import projet.factory.entity.view.JsonViews;
 import projet.factory.repository.StagiaireRepository;
 
 @RestController
@@ -33,6 +36,7 @@ public class StagiaireRestController {
 	StagiaireRepository stagiaireRepository;
 
 	@GetMapping("")
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	public List<Stagiaire> findAll(){
 		return stagiaireRepository.findAll();
 	}
