@@ -8,7 +8,6 @@ import projet.factory.entity.view.JsonViews;
 
 @Embeddable
 public class Coordonnee {
-
 	@JsonView(JsonViews.Common.class)
 	private String rue;
 	@JsonView(JsonViews.Common.class)

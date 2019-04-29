@@ -9,32 +9,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 @Entity
 @SequenceGenerator(name = "seqStagiaire", sequenceName = "seq_stagiaire", initialValue = 100, allocationSize = 1)
 public class Stagiaire {
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqStagiaire")
 	private Integer id;
+	@JsonView(JsonViews.Common.class)
 	private String prenom;
+	@JsonView(JsonViews.Common.class)
 	private String nom;
+	@JsonView(JsonViews.Common.class)
 	@Embedded
 	private Coordonnee coord;
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToOne
 	@JoinColumn(name="id_ordinateur")
 	private Ordinateur ordinateur;
+	@JsonView(JsonViews.StagiaireWithFormation.class)
 	@ManyToOne
 	@JoinColumn(name="id_formation")
 	private Formation formation;
-	@Version
-	private Integer version;
 	
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	public Stagiaire() {
 		super();
 	}

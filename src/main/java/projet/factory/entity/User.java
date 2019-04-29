@@ -6,26 +6,25 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 @Table(name = "users")
 public class User {
 	@Id
+	@JsonView(JsonViews.Common.class)
 	private String username;
+	@JsonView(JsonViews.Common.class)
 	private String password;
+	@JsonView(JsonViews.Common.class)
 	private Boolean enable;
+	@JsonView(JsonViews.UserWithRole.class)
 	@OneToMany(mappedBy = "user")
 	private List<UserRole> roles;
-	@Version
-	private Integer version;
-	
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+
 	public User() {
 	}
 

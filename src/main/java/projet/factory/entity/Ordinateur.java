@@ -10,33 +10,34 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 @SequenceGenerator(name = "seqOrdinateur", sequenceName = "seq_ordinateur", initialValue = 100, allocationSize = 1)
 public class Ordinateur {
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqOrdinateur")
 	private Integer id;
+	@JsonView(JsonViews.Common.class)
 	private String processeur;
+	@JsonView(JsonViews.Common.class)
 	private String RAM;
+	@JsonView(JsonViews.Common.class)
 	private Integer DD;
+	@JsonView(JsonViews.Common.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date anneeAchat;
+	@JsonView(JsonViews.OrdinateurWithStagiaire.class)
 	@OneToOne(mappedBy="ordinateur")
 	private Stagiaire stagiaire;
-	@Version
-	private Integer version;
 	
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	public Ordinateur() {
 		super();
 	}

@@ -13,33 +13,40 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 @SequenceGenerator(name = "seqCours", sequenceName = "seq_cours", initialValue = 100, allocationSize = 1)
 public class Cours {
-	
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCours")
 	private Integer id;
+	@JsonView(JsonViews.Common.class)
 	private String nom;
+	@JsonView(JsonViews.Common.class)
 	private Integer duree;
+	@JsonView(JsonViews.Common.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
+	@JsonView(JsonViews.CoursWithSalle.class)
 	@OneToOne
 	@JoinColumn(name="id_salle")
 	private Salle salle;
+	@JsonView(JsonViews.CoursWithEnseigner.class)
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_formateur"),@JoinColumn(name="id_matiere")})
 	private Enseigner enseignement;
+	@JsonView(JsonViews.CoursWithFormation.class)
 	@ManyToOne
 	@JoinColumn(name = "id_formation")
 	private Formation formation;
-	@Version
-	private Integer version;
 	
 	public Cours() {
 		super();
@@ -124,14 +131,6 @@ public class Cours {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 	
 	

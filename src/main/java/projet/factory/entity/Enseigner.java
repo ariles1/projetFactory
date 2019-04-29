@@ -7,18 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
-import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 public class Enseigner {
 	@EmbeddedId
 	private EnseignerPk key;
+	@JsonView(JsonViews.EnseignerWithNiveau.class)
 	@Enumerated(EnumType.STRING)
 	private Niveau niveau;
+	@JsonView(JsonViews.EnseignerWithCours.class)
 	@OneToMany(mappedBy="enseignement")
 	private List<Cours> courses;
-	@Version
-	private Integer version;
 	
 	public Enseigner() {
 	}
@@ -37,22 +40,6 @@ public class Enseigner {
 
 	public void setNiveau(Niveau niveau) {
 		this.niveau = niveau;
-	}
-
-	public List<Cours> getCourses() {
-		return courses;
-	}
-
-	public void setCourses(List<Cours> courses) {
-		this.courses = courses;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 
 	

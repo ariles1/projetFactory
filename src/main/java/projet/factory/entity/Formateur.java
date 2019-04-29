@@ -9,16 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Version;
 
 import projet.factory.entity.view.JsonViews;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonView;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @Entity
 @SequenceGenerator(name = "seqFormateur", sequenceName = "seq_formateur", initialValue = 100, allocationSize = 1)
 public class Formateur {
-
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormateur")
 	private Integer id;
@@ -29,21 +30,13 @@ public class Formateur {
 	@Embedded
 	@JsonView(JsonViews.FormateurWithCoordonnee.class)
 	private Coordonnee coord;
-	@OneToMany(mappedBy="key.formateur")
 	@JsonView(JsonViews.FormateurWithEnseigner.class)
+	@OneToMany(mappedBy="key.formateur")
 	private List<Enseigner> enseignements;
-	@OneToMany(mappedBy="formateur")
 	@JsonView(JsonViews.FormateurWithIndisponibilites.class)
+	@OneToMany(mappedBy="formateur")
 	private List<Indisponibilite> indisponibilites;
-	@Version
-	private Integer version;
 	
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	public Formateur() {
 		super();
 	}

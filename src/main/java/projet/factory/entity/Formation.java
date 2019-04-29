@@ -11,16 +11,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 @SequenceGenerator(name = "seqFormation", sequenceName = "seq_formation", initialValue = 100, allocationSize = 1)
 public class Formation {
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormation")
 	private Integer id;
+	@JsonView(JsonViews.Common.class)
 	private String nom;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
@@ -28,19 +33,13 @@ public class Formation {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
+	@JsonView(JsonViews.FormationWithCours.class)
 	@OneToMany(mappedBy="formation")
 	private List<Cours> courses;
+	@JsonView(JsonViews.FormationWithStagiaire.class)
 	@OneToMany(mappedBy="formation")
 	private List<Stagiaire> stagiaires;
-	@Version
-	private Integer version;
 	
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	public Formation() {
 		super();
 	}

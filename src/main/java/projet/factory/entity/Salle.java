@@ -6,18 +6,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 @SequenceGenerator(name = "seqSalle", sequenceName = "seq_salle", initialValue = 100, allocationSize = 1)
 public class Salle {
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSalle")
 	private Integer id;
+	@JsonView(JsonViews.Common.class)
 	private String nom;
+	@JsonView(JsonViews.Common.class)
 	private Integer capacite;
-	@Version
-	private Integer version;
+	@JsonView(JsonViews.SalleWithCours.class)
 	@OneToOne(mappedBy="salle")
 	private Cours cours;
 	
@@ -70,12 +75,6 @@ public class Salle {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 	
 	

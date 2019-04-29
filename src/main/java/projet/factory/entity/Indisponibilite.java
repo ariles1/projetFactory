@@ -11,31 +11,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.factory.entity.view.JsonViews;
 
 @Entity
 @SequenceGenerator(name = "seqIndisponibilite", sequenceName = "seq_indisponibilite", initialValue = 100, allocationSize = 1)
 public class Indisponibilite {
+	@JsonView(JsonViews.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqIndisponibilite")
 	private Integer id;
+	@JsonView(JsonViews.IndisponibiliteWithFormateur.class)
 	@ManyToOne
 	@JoinColumn(name="id_formateur")
 	private Formateur formateur;
+	@JsonView(JsonViews.Common.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date date;
-	@Version
-	private Integer version;
 	
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	public Indisponibilite() {
 		super();
 	}
