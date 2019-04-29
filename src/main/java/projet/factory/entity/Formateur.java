@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import projet.factory.entity.view.JsonViews;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @SequenceGenerator(name = "seqFormateur", sequenceName = "seq_formateur", initialValue = 100, allocationSize = 1)
 public class Formateur {
@@ -17,7 +21,9 @@ public class Formateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormateur")
 	private Integer id;
+	@JsonView(JsonViews.Common.class)
 	private String nom;
+	@JsonView(JsonViews.Common.class)
 	private String prenom;
 	@Embedded
 	private Coordonnee coord;
