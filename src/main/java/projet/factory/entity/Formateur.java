@@ -26,10 +26,13 @@ public class Formateur {
 	@JsonView(JsonViews.Common.class)
 	private String prenom;
 	@Embedded
+	@JsonView(JsonViews.FormateurWithCoordonnee.class)
 	private Coordonnee coord;
 	@OneToMany(mappedBy="key.formateur")
+	@JsonView(JsonViews.FormateurWithEnseigner.class)
 	private List<Enseigner> enseignements;
 	@OneToMany(mappedBy="formateur")
+	@JsonView(JsonViews.FormateurWithIndisponibilites.class)
 	private List<Indisponibilite> indisponibilites;
 	
 	public Formateur() {
