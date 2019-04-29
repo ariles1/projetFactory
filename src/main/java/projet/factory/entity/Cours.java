@@ -125,6 +125,14 @@ public class Cours {
 			return false;
 		return true;
 	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	
 	
 
