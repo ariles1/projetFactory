@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import projet.factory.entity.Formateur;
+import projet.factory.entity.view.JsonViews;
 import projet.factory.repository.FormateurRepository;
 
 @RestController
@@ -32,7 +35,9 @@ public class FormateurRestController {
 	@Autowired
 	FormateurRepository formateurRepository;
 
+	
 	@GetMapping("")
+	@JsonView(JsonViews.Common.class)
 	public List<Formateur> findAll(){
 		return formateurRepository.findAll();
 	}
