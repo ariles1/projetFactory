@@ -30,10 +30,15 @@ public class Indisponibilite {
 	@ManyToOne
 	@JoinColumn(name="id_formateur")
 	private Formateur formateur;
+	@ManyToOne
+	@JoinColumn(name="id_salle")
+	private Salle salle;
 	@JsonView(JsonViews.Common.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date date;
+	@JsonView(JsonViews.Common.class)
+	private String motif;
 	@Version
 	private Integer version;
 	
@@ -41,9 +46,21 @@ public class Indisponibilite {
 	public Integer getVersion() {
 		return version;
 	}
-
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+	
+	public Salle getSalle() {
+		return salle;
+	}
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
+	public String getMotif() {
+		return motif;
+	}
+	public void setMotif(String motif) {
+		this.motif = motif;
 	}
 	public Indisponibilite() {
 		super();

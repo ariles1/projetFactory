@@ -20,19 +20,43 @@ public class Matiere {
 	private Integer id;
 	@JsonView(JsonViews.Common.class)
 	private String nom;
+	@JsonView(JsonViews.Common.class)
+	private String prerequis;
+	@JsonView(JsonViews.Common.class)
+	private String objectif;
+	@JsonView(JsonViews.Common.class)
+	private String contenu;
 	@JsonView(JsonViews.MatiereWithEnseigner.class)
 	@OneToMany(mappedBy="key.matiere")
 	private List<Enseigner> enseignements;
+	
 	@Version
 	private Integer version;
-	
 	
 	public Integer getVersion() {
 		return version;
 	}
-
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+	
+	public String getPrerequis() {
+		return prerequis;
+	}
+	public void setPrerequis(String prerequis) {
+		this.prerequis = prerequis;
+	}
+	public String getObjectif() {
+		return objectif;
+	}
+	public void setObjectif(String objectif) {
+		this.objectif = objectif;
+	}
+	public String getContenu() {
+		return contenu;
+	}
+	public void setContenu(String contenu) {
+		this.contenu = contenu;
 	}
 	public Matiere() {
 		super();

@@ -1,9 +1,12 @@
 package projet.factory.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
@@ -26,6 +29,8 @@ public class Salle {
 	@JsonView(JsonViews.SalleWithCours.class)
 	@OneToOne(mappedBy="salle")
 	private Cours cours;
+	@OneToMany(mappedBy="salle")
+	private List<Indisponibilite> indisponibilites;
 	@Version
 	private Integer version;
 	
