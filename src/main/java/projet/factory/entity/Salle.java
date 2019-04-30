@@ -3,6 +3,7 @@ package projet.factory.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,12 +23,12 @@ public class Salle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSalle")
 	private Integer id;
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.CoursView.class})
 	private String nom;
 	@JsonView(JsonViews.Common.class)
 	private Integer capacite;
 	@JsonView(JsonViews.SalleWithCours.class)
-	@OneToOne(mappedBy="salle")
+	@OneToOne(mappedBy="salle", fetch = FetchType.LAZY)
 	private Cours cours;
 	@OneToMany(mappedBy="salle")
 	private List<Indisponibilite> indisponibilites;

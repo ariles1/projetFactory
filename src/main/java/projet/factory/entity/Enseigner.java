@@ -16,8 +16,9 @@ import projet.factory.entity.view.JsonViews;
 @Entity
 public class Enseigner {
 	@EmbeddedId
+	@JsonView(JsonViews.CoursView.class)
 	private EnseignerPk key;
-	@JsonView(JsonViews.EnseignerWithNiveau.class)
+	@JsonView({JsonViews.EnseignerWithNiveau.class, JsonViews.CoursView.class})
 	@Enumerated(EnumType.STRING)
 	private Niveau niveau;
 	@JsonView(JsonViews.EnseignerWithCours.class)

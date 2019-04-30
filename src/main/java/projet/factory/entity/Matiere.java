@@ -18,7 +18,7 @@ public class Matiere {
 	@JsonView(JsonViews.Common.class)
 	@Id
 	private Integer id;
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.CoursView.class})
 	private String nom;
 	@JsonView(JsonViews.Common.class)
 	private String prerequis;

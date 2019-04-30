@@ -43,6 +43,7 @@ public class FormationRestController {
 	}
 	
 	@GetMapping("/{id}")
+	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Formation> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Formation> opt = formationRepository.findById(id);
 		if (opt.isPresent()) {

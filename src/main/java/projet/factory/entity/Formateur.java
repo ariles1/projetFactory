@@ -24,9 +24,9 @@ public class Formateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormateur")
 	private Integer id;
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.CoursView.class})
 	private String nom;
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.CoursView.class})
 	private String prenom;
 	@Embedded
 	@JsonView(JsonViews.FormateurWithCoordonnee.class)

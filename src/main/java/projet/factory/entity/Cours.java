@@ -3,6 +3,7 @@ package projet.factory.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,27 +25,27 @@ import projet.factory.entity.view.JsonViews;
 @Entity
 @SequenceGenerator(name = "seqCours", sequenceName = "seq_cours", initialValue = 100, allocationSize = 1)
 public class Cours {
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.CoursView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCours")
 	private Integer id;
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.CoursView.class)
 	private String nom;
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.CoursView.class)
 	private Integer duree;
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.CoursView.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
-	@JsonView(JsonViews.CoursWithSalle.class)
-	@OneToOne
+	@JsonView(JsonViews.CoursView.class)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_salle")
 	private Salle salle;
-	@JsonView(JsonViews.CoursWithEnseigner.class)
+	@JsonView(JsonViews.CoursView.class)
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_formateur"),@JoinColumn(name="id_matiere")})
 	private Enseigner enseignement;
-	@JsonView(JsonViews.CoursWithFormation.class)
+	@JsonView({JsonViews.CoursWithFormation.class,JsonViews.CoursView.class})
 	@ManyToOne
 	@JoinColumn(name = "id_formation")
 	private Formation formation;

@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import projet.factory.entity.Cours;
+import projet.factory.entity.view.JsonViews;
 import projet.factory.repository.CoursRepository;
 
 @RestController
@@ -35,6 +38,13 @@ public class CoursRestController {
 	@GetMapping("")
 	public List<Cours> findAll(){
 		return coursRepository.findAll();
+	}
+	
+	@GetMapping("/formation/{id}")
+	@JsonView(JsonViews.CoursView.class)
+	public List<Cours> findAllCoursesOfFormation(@PathVariable(name = "id") Integer id) {
+		List<Cours> cours = coursRepository.findAllCoursesOfFormation(id);
+		return cours;
 	}
 	
 	@GetMapping("/{id}")

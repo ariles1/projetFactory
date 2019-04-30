@@ -22,7 +22,7 @@ import projet.factory.entity.view.JsonViews;
 @Entity
 @SequenceGenerator(name = "seqFormation", sequenceName = "seq_formation", initialValue = 100, allocationSize = 1)
 public class Formation {
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.CoursView.class})
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormation")
 	private Integer id;
