@@ -21,9 +21,9 @@ public class Stagiaire {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqStagiaire")
 	private Integer id;
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.FormationView.class})
 	private String prenom;
-	@JsonView(JsonViews.Common.class)
+	@JsonView({JsonViews.Common.class,JsonViews.FormationView.class})
 	private String nom;
 	@JsonView(JsonViews.Common.class)
 	@Embedded

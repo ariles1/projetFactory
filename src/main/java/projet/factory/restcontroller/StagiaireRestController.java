@@ -51,6 +51,13 @@ public class StagiaireRestController {
 		}
 	}
 
+	@GetMapping("/formation/{id}")
+	@JsonView(JsonViews.FormationView.class)
+	public List<Stagiaire> findAllStagiairesOfFormation(@PathVariable(name = "id") Integer id) {
+		List<Stagiaire> stagiaires = stagiaireRepository.findAllStagiairesOfFormation(id);
+		return stagiaires;
+	}
+	
 	@PostMapping("")
 	public ResponseEntity<Void> insert(@Valid @RequestBody Stagiaire stagiaire, BindingResult br,
 			UriComponentsBuilder uCB) {

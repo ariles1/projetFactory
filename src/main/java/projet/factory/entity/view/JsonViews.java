@@ -3,7 +3,8 @@ package projet.factory.entity.view;
 public class JsonViews {
 	public static class CoursView extends Common {
 	};
-
+	public static class FormationView extends Common {
+	};
 	public static class Common {
 	};
 
